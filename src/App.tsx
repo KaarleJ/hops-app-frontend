@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Menu from "./components/Menu";
+import theme from "./theme";
 
-function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from '@mui/material/styles';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundImage: `url(${process.env.PUBLIC_URL + '/hops_background.png'})`}}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Menu/>
+          <Routes>
+            <Route path='/' element={<div>Hello World!</div>}/>
+            <Route path='/hops' element={<div>Hops here</div>}/>
+            <Route path='/signin' element={<div>signin here</div>}/>
+            <Route path='/signup' element={<div>signup here</div>}/>
+            <Route path='/about' element={<div>about here</div>}/>
+            <Route path='/profile' element={<div>profile here</div>} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }
