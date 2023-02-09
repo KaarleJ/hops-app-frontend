@@ -1,6 +1,6 @@
 import { Link, AppBar, Container, Toolbar, Box, Typography } from "@mui/material";
 
-const pages = ['hops', 'signin', 'signup', 'about']
+const pages = ['hops', 'login', 'signup', 'about']
 
 const Menu = () => {
   return (

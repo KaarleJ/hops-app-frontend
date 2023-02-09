@@ -1,5 +1,5 @@
 body {
   background-image: url(./images/hops_background.png);
-  background-size: 'contain';
+  background-size: 'cover';
   background-repeat: no-repeat;
 }
