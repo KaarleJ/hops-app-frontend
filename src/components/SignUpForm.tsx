@@ -1,7 +1,7 @@
 import { Formik } from "formik"
-import useLogin from "../hooks.ts/useLogin";
+import useSignUp from "../hooks.ts/useSignUp";
 import { useNavigate } from "react-router-dom";
-import { Signin } from "../types";
+import { Signup } from "../types";
 import * as yup from 'yup';
 import { Box, Button, Typography } from "@mui/material";
 import FormikTextInput from "./FormikTextInput";
@@ -9,15 +9,27 @@ import { useState } from "react";
 
 const initialValues = {
   username: '',
+  name: '',
   password: ''
 }
 
 const validationSchema = yup.object().shape({
   username: yup
   .string()
+  .min(3, 'Minimum length is 3 characters')
+  .max(10, 'Maximum length is 10 characters')
   .required('username missing'),
+  name: yup
+  .string()
+  .min(5, 'Minimum length is 5 characters')
+  .max(40, 'Maximum length is 40 characters')
+  .required('name missing'),
   password: yup
   .string()
+  .max(30, 'Maximum length is 30 characters')
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  )
   .required('password missing')
 })
 
@@ -26,11 +38,13 @@ interface formProps {
   error?: string
 }
 
-const SignInForm = ({ onSubmit, error }: formProps) => {
+const SignUpForm = ({ onSubmit, error }: formProps) => {
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 
       <FormikTextInput name='username' placeholder='username' sx={{ mb: 2, mt: 4}}/>
+
+      <FormikTextInput name='name' placeholder='name' sx={{ mb: 2, mt: 2}}/>
 
       <FormikTextInput name='password' placeholder='password' type='password' sx={{ mb: 2, mt: 2}}/>
 
@@ -41,23 +55,23 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
       }
 
       <Button onClick={onSubmit} variant='contained' color='primary' sx={{mt: 2, paddingLeft: 2, paddingRight: 2}}>
-        login
+        signup
       </Button>
     </Box>
   )
 };
 
-const SignIn = () => {
+const SignUp = () => {
   const [ error, setError ] = useState<string>('');
   const navigate = useNavigate();
-  const { login } = useLogin();
+  const { signUp } = useSignUp();
 
-  const onSubmit = async (values: Signin) => {
+  const onSubmit = async (values: Signup) => {
 
-    const { username, password } = values;
+    const { username, name, password } = values;
 
     try {
-      await login({ username, password});
+      await signUp({ username, name, password});
       navigate('/');
     } catch(e) {
       console.error(e)
@@ -69,9 +83,9 @@ const SignIn = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-      {({handleSubmit}) => <SignInForm onSubmit={handleSubmit} error={error}/>}
+      {({handleSubmit}) => <SignUpForm onSubmit={handleSubmit} error={error}/>}
     </Formik>
   );
 };
 
-export default SignIn;
+export default SignUp;

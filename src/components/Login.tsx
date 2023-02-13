@@ -1,12 +1,10 @@
 import Page from "./Page";
-import { Typography } from "@mui/material";
+import SignInForm from "./SignInForm";
 
 const Login = () => {
   return (
     <Page>
-      <Typography>
-        Login here
-      </Typography>
+      <SignInForm />
     </Page>
   );
 };

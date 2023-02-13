@@ -3,15 +3,18 @@ import { Signin } from '../types';
 
 import { useApolloClient, useMutation } from '@apollo/client';
 
-export const useSignIn = () => {
-  const [ authenticate, result] = useMutation(LOGIN);
+const useLogin = () => {
+  const [ authenticate ] = useMutation(LOGIN);
   const apolloClient = useApolloClient();
 
-  const signIn = async ({ username, password }: Signin) => {
+  const login = async ({ username, password }: Signin) => {
     const { data } = await authenticate({ variables: { username, password }})
+    console.log(data)
     window.localStorage.setItem('user-token', data.authenticate.value)
     apolloClient.resetStore()
   }
   
-  return [ signIn, result];
+  return { login };
 };
+
+export default useLogin;
