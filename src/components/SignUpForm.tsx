@@ -40,11 +40,17 @@ interface formProps {
 
 const SignUpForm = ({ onSubmit, error }: formProps) => {
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-      <FormikTextInput name='username' placeholder='username' sx={{ mb: 2, mt: 4}}/>
+      <Typography variant='h6' color='text'> Username </Typography>
+
+      <FormikTextInput name='username' placeholder='username' sx={{ mb: 2, mt: 2}}/>
+
+      <Typography variant='h6' color='text'> Full name </Typography>
 
       <FormikTextInput name='name' placeholder='name' sx={{ mb: 2, mt: 2}}/>
+
+      <Typography variant='h6' color='text'> Password </Typography>
 
       <FormikTextInput name='password' placeholder='password' type='password' sx={{ mb: 2, mt: 2}}/>
 

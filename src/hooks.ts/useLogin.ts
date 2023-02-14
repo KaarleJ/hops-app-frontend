@@ -9,7 +9,6 @@ const useLogin = () => {
 
   const login = async ({ username, password }: Signin) => {
     const { data } = await authenticate({ variables: { username, password }})
-    console.log(data)
     window.localStorage.setItem('user-token', data.authenticate.value)
     apolloClient.resetStore()
   }

@@ -1,12 +1,10 @@
 import Page from "./Page";
-import { Typography } from "@mui/material";
+import Calendar from './Calendar';
 
 const Hops= () => {
   return (
     <Page>
-      <Typography>
-        Hops here
-      </Typography>
+      <Calendar />
     </Page>
   );
 };
