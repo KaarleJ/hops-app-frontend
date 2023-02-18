@@ -1,11 +1,13 @@
-import { Link, AppBar, Container, Toolbar, Box, Typography, Tooltip, IconButton, Menu as Bar, MenuItem } from "@mui/material";
+import { AppBar, Container, Toolbar, Box, Typography, Tooltip, IconButton, Menu as Bar, MenuItem } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import * as React from 'react';
+import { Link } from 'react-router-dom'
+import { useState, MouseEvent, useEffect} from 'react';
 
 const Menu = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [ user, setUser ] = useState<string | null>();
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -17,16 +19,18 @@ const Menu = () => {
     localStorage.clear();
     setAnchorElUser(null);
   }
-  
-  const user = window.localStorage.getItem('user-token');
+
+  useEffect(() => (
+    setUser(window.localStorage.getItem('user-token'))
+  ), [window.localStorage.getItem('user-token')]);
 
   return (
-    <AppBar position='static' color='primary' sx={{width: '60%'}}>
+    <AppBar position='static' color='primary' sx={{width: '90%'}}>
       <Container fixed={true} maxWidth='md' disableGutters>
         <Toolbar sx={{display: 'flex', color: 'secondary'}}>
 
             <Box sx={{ flexGrow: 1, flexShrink: 1, display: { md: 'flex' } }}>
-              <Link href={'/'}>
+              <Link to={'/'} style={{ textDecoration: 'none' }}>
                 {
                   <Typography color='white' variant='h5'>
                     Home
@@ -36,7 +40,7 @@ const Menu = () => {
             </Box>
 
             <Box sx={{ flexGrow: 1, flexShrink: 1, display: { md: 'flex' } }}>
-              <Link href={'/hops'}>
+              <Link to={'/hops'} style={{ textDecoration: 'none' }}>
                 {
                   <Typography color='white' variant='h5'>
                     hops
@@ -46,7 +50,7 @@ const Menu = () => {
             </Box>
 
             <Box sx={{ flexGrow: 1, flexShrink: 1, display: { md: 'flex' } }}>
-              <Link href={'/about'}>
+              <Link to={'/about'} style={{ textDecoration: 'none' }}>
                 {
                   <Typography color='white' variant='h5'>
                     about
@@ -80,7 +84,7 @@ const Menu = () => {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Link href={'/profile'} underline='none'>
+                  <Link to={'/profile'} style={{ textDecoration: 'none' }}>
                     {
                       <Typography textAlign='center' variant='h6' color='secondary'>
                         Profile
@@ -90,7 +94,7 @@ const Menu = () => {
                 </MenuItem>
 
                 <MenuItem onClick={handleLogOut}>
-                  <Link href={'/'} underline='none'>
+                  <Link to={'/'} style={{ textDecoration: 'none' }}>
                     {
                       <Typography textAlign='center' variant='h6' color='secondary'>
                         Logout
@@ -102,7 +106,7 @@ const Menu = () => {
           </Box>
           :
           <Box sx={{ flexGrow: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', flexBasis: 120}}>
-            <Link href={'/login'} underline='none'>
+            <Link to={'/login'} style={{ textDecoration: 'none' }}>
               {
                 <Typography textAlign='center' variant='subtitle1' fontWeight='bold' color='white'>
                   Login
@@ -110,7 +114,7 @@ const Menu = () => {
               }
             </Link>
 
-            <Link href={'/signup'} underline='none'>
+            <Link to={'/signup'} style={{ textDecoration: 'none' }}>
               {
                 <Typography textAlign='center' variant='subtitle1' fontWeight='bold' color='white'>
                   Signup

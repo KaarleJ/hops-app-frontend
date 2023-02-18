@@ -1,11 +1,13 @@
 import { ME } from "../queries";
+import { Me } from '../types';
 import { useQuery } from "@apollo/client";
 
 import  { useEffect, useState } from 'react';
 
-const useMe = () => {
-  const [ me, setMe] = useState();
+const useMe = (): [ Me | undefined, boolean] => {
+  const [ me, setMe] = useState<Me>();
   const { loading, error, data } = useQuery(ME);
+  
 
   useEffect(() => {
     if (error) {
@@ -13,12 +15,11 @@ const useMe = () => {
       return;
     }
     if (!loading && data) {
-      setMe(data.me);
+      setMe(data.Me);
     }
   }, [data, error, loading]);
-
-
-  return { me, loading };
+  
+  return [ me, loading];
 };
 
 export default useMe;

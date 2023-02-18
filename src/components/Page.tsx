@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 const Page = (props: PropsWithChildren ) => {
   return (
     <Box sx={{
-      width: '60%',
+      width: '90%',
       marginTop: 2
     }}>
       <Paper elevation={6} square>

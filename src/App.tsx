@@ -12,7 +12,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 const App = () => {
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundImage: `url(${process.env.PUBLIC_URL + '/hops_background.png'})`}}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <ThemeProvider theme={theme}>
         <Router>
           <Menu/>

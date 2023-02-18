@@ -42,6 +42,8 @@ const SignUpForm = ({ onSubmit, error }: formProps) => {
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
+      <Typography variant='h4' sx={{ padding: 5, color: 'black' }}> Signup to HOPS app </Typography>
+
       <Typography variant='h6' color='text'> Username </Typography>
 
       <FormikTextInput name='username' placeholder='username' sx={{ mb: 2, mt: 2}}/>

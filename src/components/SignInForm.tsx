@@ -29,6 +29,8 @@ interface formProps {
 const SignInForm = ({ onSubmit, error }: formProps) => {
   return (
     <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+
+      <Typography variant='h4' sx={{ padding: 5, color: 'black' }}> Log in to HOPS app </Typography>
       
       <Typography variant='h6' color='text'> Username </Typography>
 
@@ -38,7 +40,7 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
 
       <FormikTextInput name='password' placeholder='password' type='password' sx={{ mb: 2, mt: 2}}/>
 
-      {error?
+      {error ?
         <Typography color='error'>{error}</Typography>
       :
         null
