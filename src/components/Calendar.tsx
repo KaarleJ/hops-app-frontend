@@ -1,18 +1,23 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box } from '@mui/material';
+import { Table, TableCell, TableContainer, TableHead, TableRow, Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 import { Course } from '../types';
-import useMe from '../hooks.ts/useMe';
+import useCourses from '../hooks.ts/useCourses';
 import CourseColumn from './CourseColumn';
 
-const Calendar = () => {
+interface CalendarProps {
+  year: string
+}
+
+const Calendar = ({ year } : CalendarProps) => {
   const [ courses, setCourses ] = useState<Array<Course>>();
-  const [ me, loading ] = useMe();
+  const [ returnedCourses, loading ] = useCourses(year);
 
   useEffect(() => {
-    if (me)
-    setCourses(me.courses)
-  }, [me, loading])
+    if (returnedCourses)
+    setCourses(returnedCourses)
+    console.log(returnedCourses);
+  }, [returnedCourses, loading])
 
   if (!courses) {
     return <div>loading</div>
@@ -22,7 +27,7 @@ const Calendar = () => {
     <Box sx={{
       backgroundColor: '#f2f2f2',
       boxShadow: 6,
-      height: '100%'
+      height: '90%'
     }}>
       <TableContainer sx={{
         height: 'auto',
@@ -42,30 +47,31 @@ const Calendar = () => {
               <TableCell align='center'> summer </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 0)}/>
-              </TableCell>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 1)}/>
-              </TableCell>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 2)}/>
-              </TableCell>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 3)}/>
-              </TableCell>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 4)}/>
-              </TableCell>
-              <TableCell sx={{ width: '16%'}}>
-                <CourseColumn courses={courses.filter((course) => course.startPeriod === 5)}/>
-              </TableCell>
-            </TableRow>
-          </TableBody>
         </Table>
       </TableContainer>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row'
+      }}>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={0} courses={courses.filter((course) => (course.startPeriod <= 0 && 0 <= course.endPeriod))}/>
+        </Box>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={1} courses={courses.filter((course) => (course.startPeriod <= 1 && 1 <= course.endPeriod))}/>
+        </Box>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={2} courses={courses.filter((course) => (course.startPeriod <= 2 && 2 <= course.endPeriod))}/>
+        </Box>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={3} courses={courses.filter((course) => (course.startPeriod <= 3 && 3 <= course.endPeriod))}/>
+        </Box>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={4} courses={courses.filter((course) => (course.startPeriod <= 4 && 4 <= course.endPeriod))}/>
+        </Box>
+        <Box sx={{ width: '16%'}}>
+          <CourseColumn period={5} courses={courses.filter((course) => (course.startPeriod <= 5 && 5 <= course.endPeriod))}/>
+        </Box>
+      </Box>
     </Box>
   )
 };

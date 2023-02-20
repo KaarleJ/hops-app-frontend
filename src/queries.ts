@@ -18,3 +18,17 @@ export const ME =gql`
     }
   }
 `
+
+export const COURSES = gql`
+  query Courses($year: String!) {
+    courses(year: $year) {
+      code
+      ects
+      endPeriod
+      id
+      name
+      year
+      startPeriod
+    }
+  }
+`

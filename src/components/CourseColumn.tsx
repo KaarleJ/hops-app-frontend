@@ -1,12 +1,14 @@
 import { List, ListItem, ListItemText } from "@mui/material";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Course } from '../types';
 
 interface ColumnProps {
   courses: Course[]
+  period: 0 | 1 | 2 | 3 | 4 | 5
 }
 
-const CourseColumn = ({ courses }: ColumnProps) => {
-  console.log(courses);
+const CourseColumn = ({ courses, period }: ColumnProps) => {
+
   return (
     <List>
       {courses.map((course) => (
@@ -19,9 +21,18 @@ const CourseColumn = ({ courses }: ColumnProps) => {
           color: 'white',
           
           }}>
-          <ListItemText>
-            {course.name}
-          </ListItemText>
+          {(course.endPeriod !== course.startPeriod && period < course.endPeriod) ?
+              <>
+                <ListItemText>
+                  {course.name}
+                </ListItemText>
+                <ArrowRightAltIcon />
+              </>
+              :
+              <ListItemText>
+                {course.name} ({course.ects} ects)
+              </ListItemText>
+            }
         </ListItem>
       ))}
     </List>
