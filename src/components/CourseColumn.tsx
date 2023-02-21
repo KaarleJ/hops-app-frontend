@@ -1,6 +1,8 @@
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemText, IconButton } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { Course } from '../types';
+import { fontSize } from "@mui/system";
 
 interface ColumnProps {
   courses: Course[]
@@ -8,15 +10,17 @@ interface ColumnProps {
 }
 
 const CourseColumn = ({ courses, period }: ColumnProps) => {
-
   return (
     <List>
       {courses.map((course) => (
         <ListItem key={course.id} sx={{
           backgroundColor: 'primary.main',
-          width: '100%',
-          margin: 1,
-          height: 50,
+          width: 'auto',
+          mt: 1,
+          mb: 1,
+          ml: 0.25,
+          mr: 0.25,
+          height: 60,
           borderRadius: 2,
           color: 'white',
           
@@ -29,9 +33,19 @@ const CourseColumn = ({ courses, period }: ColumnProps) => {
                 <ArrowRightAltIcon />
               </>
               :
-              <ListItemText>
-                {course.name} ({course.ects} ects)
-              </ListItemText>
+              <>
+                <ListItemText>
+                  {course.name} ({course.ects} ects)
+                </ListItemText>
+                <IconButton sx={{
+                  backgroundColor: 'white',
+                  color: 'text.main',
+                  width: 15,
+                  height: 15
+                }}>
+                  <ClearIcon fontSize='small' />
+                </IconButton>
+              </>
             }
         </ListItem>
       ))}

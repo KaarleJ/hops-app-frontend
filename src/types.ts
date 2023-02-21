@@ -27,9 +27,21 @@ export interface Course {
   endPeriod: Period,
 }
 
+export type NewCourse = Omit<Course, 'id'>;
+
 export interface Me {
   courses: Course[],
   id: string,
   name: string,
   username: string
+}
+
+export interface PeriodOption {
+  value: Period,
+  label: string
+}
+
+export interface YearOption {
+  value: number,
+  label: string
 }

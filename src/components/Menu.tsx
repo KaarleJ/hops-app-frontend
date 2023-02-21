@@ -1,11 +1,15 @@
 import { AppBar, Container, Toolbar, Box, Typography, Tooltip, IconButton, Menu as Bar, MenuItem } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom'
-import { useState, MouseEvent, useEffect} from 'react';
+import { useState, MouseEvent } from 'react';
+import { Rootstate } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../reducers/userReducer";
 
 const Menu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [ user, setUser ] = useState<string | null>();
+  const dispatch = useDispatch();
+  const user = useSelector((state: Rootstate) => state.user)
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -17,12 +21,9 @@ const Menu = () => {
 
   const handleLogOut = () => {
     localStorage.clear();
+    dispatch(setUser(null))
     setAnchorElUser(null);
   }
-
-  useEffect(() => (
-    setUser(window.localStorage.getItem('user-token'))
-  ), [window.localStorage.getItem('user-token')]);
 
   return (
     <AppBar position='static' color='primary' sx={{width: '90%'}}>

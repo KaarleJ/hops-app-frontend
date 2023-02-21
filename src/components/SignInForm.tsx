@@ -1,5 +1,5 @@
 import { Formik } from "formik"
-import useLogin from "../hooks.ts/useLogin";
+import useLogin from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
 import { Signin } from "../types";
 import * as yup from 'yup';
