@@ -1,13 +1,8 @@
 import { Table, TableCell, TableContainer, TableHead, TableRow, Box } from '@mui/material';
-
-import { Course } from '../types';
 import CourseColumn from './CourseColumn';
+import CalendarFooter from "./CalendarFooter";
 
-interface CalendarProps {
-  courses: Course[]
-}
-
-const Calendar = ({ courses } : CalendarProps) => {
+const Calendar = () => {
   return (
     <Box sx={{
       backgroundColor: '#f2f2f2',
@@ -36,27 +31,31 @@ const Calendar = ({ courses } : CalendarProps) => {
       </TableContainer>
       <Box sx={{
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        height: 'calc(85% - 48px)',
+        overflow: 'auto',
+        ml: 2
       }}>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={0} courses={courses.filter((course) => (course.startPeriod <= 0 && 0 <= course.endPeriod))}/>
+          <CourseColumn period={0}/>
         </Box>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={1} courses={courses.filter((course) => (course.startPeriod <= 1 && 1 <= course.endPeriod))}/>
+          <CourseColumn period={1}/>
         </Box>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={2} courses={courses.filter((course) => (course.startPeriod <= 2 && 2 <= course.endPeriod))}/>
+          <CourseColumn period={2}/>
         </Box>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={3} courses={courses.filter((course) => (course.startPeriod <= 3 && 3 <= course.endPeriod))}/>
+          <CourseColumn period={3}/>
         </Box>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={4} courses={courses.filter((course) => (course.startPeriod <= 4 && 4 <= course.endPeriod))}/>
+          <CourseColumn period={4}/>
         </Box>
         <Box sx={{ width: '16.6%' }}>
-          <CourseColumn period={5} courses={courses.filter((course) => (course.startPeriod <= 5 && 5 <= course.endPeriod))}/>
+          <CourseColumn period={5}/>
         </Box>
       </Box>
+      <CalendarFooter />
     </Box>
   )
 };

@@ -1,13 +1,19 @@
-import Page from "./Page";
-import { Typography } from "@mui/material";
+import { Rootstate } from "../store";
+import { useSelector } from "react-redux";
+import Compilation from "./Compilation";
+import Introduction from "./Introduction";
 
 const Home = () => {
+  const user = useSelector((state: Rootstate) => state.user);
+
   return (
-    <Page>
-      <Typography>
-        Hello World!
-      </Typography>
-    </Page>
+    <>
+      {user ?
+        <Compilation />
+        :
+        <Introduction />
+      }
+    </>
   );
 };
 

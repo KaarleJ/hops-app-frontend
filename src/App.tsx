@@ -5,6 +5,7 @@ import Hops from "./components/Hops";
 import About from "./components/About";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import Page from "./components/Page";
 import theme from "./theme";
 import { Rootstate } from "./store";
 import { useEffect } from 'react';
@@ -28,14 +29,16 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Router>
           <Menu/>
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/hops' element={<Hops />}/>
-            <Route path='/login' element={<Login />}/>
-            <Route path='/signup' element={<Signup />}/>
-            <Route path='/about' element={<About />}/>
-            <Route path='/profile' element={<Profile />} />
-          </Routes>
+          <Page>
+            <Routes>
+              <Route path='/' element={<Home />}/>
+              <Route path='/hops' element={<Hops />}/>
+              <Route path='/login' element={<Login />}/>
+              <Route path='/signup' element={<Signup />}/>
+              <Route path='/about' element={<About />}/>
+              <Route path='/profile' element={<Profile />} />
+            </Routes>
+          </Page>
         </Router>
       </ThemeProvider>
     </div>

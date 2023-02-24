@@ -31,3 +31,11 @@ export const ADD_COURSE = gql`
     }
   }
 `
+
+export const REMOVE_COURSE = gql`
+  mutation RemoveCourse($removeCourseId: String!) {
+    removeCourse(id: $removeCourseId) {
+      id
+    }
+  }
+`

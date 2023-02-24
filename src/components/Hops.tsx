@@ -1,4 +1,3 @@
-import Page from "./Page";
 import Calendar from './Calendar';
 import CreateForm from "./CreateForm";
 import { Typography, Button, Box, Modal } from "@mui/material";
@@ -7,25 +6,29 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState, useEffect } from "react";
 import useCourses from "../hooks/useCourses";
 import { Course } from "../types";
+import { useSelector, useDispatch } from "react-redux";
+import { Rootstate } from "../store";
+import { setCourses } from "../reducers/coursesReducer";
 
 const Hops= () => {
   const [ year, setYear ] = useState<number>(0)
   const [ open, setOpen ] = useState<boolean>(false);
-  
-  const [ courses, setCourses ] = useState<Array<Course>>();
+
+  const dispatch = useDispatch();
+  const courses = useSelector((state: Rootstate) => state.courses)
   const [ returnedCourses, loading ] = useCourses(year.toString());
   
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleCourseUpdate = (course: Course) => {
-    setCourses(courses?.concat(course))
+    dispatch(setCourses(courses.concat(course)))
     setOpen(false);
   }
 
   useEffect(() => {
     if (returnedCourses)
-    setCourses(returnedCourses)
+    dispatch(setCourses(returnedCourses))
   }, [returnedCourses, loading, year])
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const Hops= () => {
   }
 
   return (
-    <Page>
+    <>
       <Modal
         open={open}
         onClose={handleClose}
@@ -86,8 +89,8 @@ const Hops= () => {
           Add a new course
         </Button>
       </Box>
-      <Calendar courses={courses}/>
-    </Page>
+      <Calendar/>
+    </>
   );
 };
 
