@@ -1,13 +1,12 @@
-import { ME } from "../queries";
+import { ME } from '../services/queries';
 import { Me } from '../types';
-import { useQuery } from "@apollo/client";
+import { useQuery } from '@apollo/client';
 
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useMe = (): [ Me | undefined, boolean] => {
-  const [ me, setMe] = useState<Me>();
+const useMe = (): [Me | undefined, boolean] => {
+  const [me, setMe] = useState<Me>();
   const { loading, error, data } = useQuery(ME);
-  
 
   useEffect(() => {
     if (error) {
@@ -18,8 +17,8 @@ const useMe = (): [ Me | undefined, boolean] => {
       setMe(data.Me);
     }
   }, [data, error, loading]);
-  
-  return [ me, loading];
+
+  return [me, loading];
 };
 
 export default useMe;

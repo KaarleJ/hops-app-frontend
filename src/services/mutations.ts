@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
   mutation Login($username: String!, $password: String!) {
@@ -6,7 +6,7 @@ export const LOGIN = gql`
       value
     }
   }
-`
+`;
 
 export const SIGNUP = gql`
   mutation Signup($username: String!, $name: String!, $password: String!) {
@@ -16,11 +16,25 @@ export const SIGNUP = gql`
       username
     }
   }
-`
+`;
 
 export const ADD_COURSE = gql`
-  mutation AddCourse($name: String!, $code: String!, $ects: Int!, $year: Int!, $startPeriod: Int!, $endPeriod: Int!) {
-    addCourse(name: $name, code: $code, ects: $ects, year: $year, startPeriod: $startPeriod, endPeriod: $endPeriod) {
+  mutation AddCourse(
+    $name: String!
+    $code: String!
+    $ects: Int!
+    $year: Int!
+    $startPeriod: Int!
+    $endPeriod: Int!
+  ) {
+    addCourse(
+      name: $name
+      code: $code
+      ects: $ects
+      year: $year
+      startPeriod: $startPeriod
+      endPeriod: $endPeriod
+    ) {
       code
       ects
       endPeriod
@@ -30,12 +44,14 @@ export const ADD_COURSE = gql`
       year
     }
   }
-`
+`;
 
 export const REMOVE_COURSE = gql`
   mutation RemoveCourse($removeCourseId: String!) {
     removeCourse(id: $removeCourseId) {
+
+      
       id
     }
   }
-`
+`;

@@ -8,8 +8,8 @@ const coursesSlice = createSlice({
     setCourses(state, action) {
       const courses = action.payload;
       return courses;
-    }
-  }
+    },
+  },
 });
 
 export const { setCourses } = coursesSlice.actions;

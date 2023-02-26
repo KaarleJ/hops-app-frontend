@@ -5,9 +5,9 @@ import coursesReducer from './reducers/coursesReducer';
 const store = configureStore({
   reducer: {
     user: userReducer,
-    courses: coursesReducer
-  }
-})
+    courses: coursesReducer,
+  },
+});
 
 export default store;
 

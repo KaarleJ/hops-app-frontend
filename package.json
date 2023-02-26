@@ -60,6 +60,8 @@
     "@mui/types": "^7.2.3",
     "@types/dotenv": "^8.2.0",
     "@types/react-router-dom": "^5.3.3",
-    "@types/yup": "^0.32.0"
+    "@types/yup": "^0.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "2.8.4"
   }
 }

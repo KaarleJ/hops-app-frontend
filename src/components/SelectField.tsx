@@ -1,6 +1,6 @@
-import { Field, FieldProps } from "formik";
+import { Field, FieldProps } from 'formik';
 import { InputLabel, Select, MenuItem } from '@mui/material';
-import { PeriodOption, YearOption } from "../types";
+import { PeriodOption, YearOption } from '../types';
 
 type SelectFieldProps = {
   name: string;
@@ -8,14 +8,16 @@ type SelectFieldProps = {
   options: PeriodOption[] | YearOption[];
 };
 
-const FormikSelect = ({ field, ...props }: FieldProps) => <Select {...field} {...props} />;
+const FormikSelect = ({ field, ...props }: FieldProps) => (
+  <Select {...field} {...props} />
+);
 
 const SelectField = ({ name, label, options }: SelectFieldProps) => (
   <>
     <InputLabel>{label}</InputLabel>
     <Field
       fullWidth
-      style={{ marginBottom: "0.5em" }}
+      style={{ marginBottom: '0.5em' }}
       label={label}
       component={FormikSelect}
       name={name}

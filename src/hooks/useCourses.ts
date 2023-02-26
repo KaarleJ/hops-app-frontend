@@ -1,18 +1,17 @@
-import { COURSES } from "../queries";
+import { COURSES } from '../services/queries';
 import { Course } from '../types';
-import { useQuery } from "@apollo/client";
+import { useQuery } from '@apollo/client';
 
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useCourses = (year: string): [ [Course] | undefined, boolean] => {
-  const [ courses, setCourses] = useState<[Course]>();
+const useCourses = (year: string): [[Course] | undefined, boolean] => {
+  const [courses, setCourses] = useState<[Course]>();
   const { loading, error, data } = useQuery(COURSES, {
     fetchPolicy: 'network-only',
     variables: {
-      year
-    }
+      year,
+    },
   });
-  
 
   useEffect(() => {
     if (error) {
@@ -23,8 +22,8 @@ const useCourses = (year: string): [ [Course] | undefined, boolean] => {
       setCourses(data.courses);
     }
   }, [data, error, loading]);
-  
-  return [ courses, loading];
+
+  return [courses, loading];
 };
 
 export default useCourses;

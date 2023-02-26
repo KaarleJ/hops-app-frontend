@@ -7,8 +7,8 @@ const userSlice = createSlice({
     setUser(state, action) {
       const user = action.payload;
       return user;
-    }
-  }
+    },
+  },
 });
 
 export const { setUser } = userSlice.actions;

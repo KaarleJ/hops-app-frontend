@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const ME =gql`
+export const ME = gql`
   query Query {
     Me {
       courses {
@@ -17,7 +17,7 @@ export const ME =gql`
       username
     }
   }
-`
+`;
 
 export const COURSES = gql`
   query Courses($year: String!) {
@@ -31,4 +31,4 @@ export const COURSES = gql`
       startPeriod
     }
   }
-`
+`;

@@ -6,15 +6,15 @@ const theme = createTheme({
       main: '#0B0754',
     },
     secondary: {
-      main: '#313135'
+      main: '#313135',
     },
     text: {
-      primary: '#6D6C6C'
+      primary: '#6D6C6C',
     },
     error: {
-      main: '#C01D1D'
-    }
-  }
+      main: '#C01D1D',
+    },
+  },
 });
 
 export default theme;
