@@ -3,7 +3,7 @@ import useCourse from '../../hooks/useCourse';
 import * as yup from 'yup';
 import {
   Course,
-  NewCourse,
+  FormCourse,
   Period,
   PeriodOption,
   YearOption,
@@ -20,7 +20,7 @@ interface CreateFormProps {
 const initialValues = {
   name: '',
   code: '',
-  ects: 0,
+  ects: '',
   year: new Date().getFullYear(),
   startPeriod: 1 as Period,
   endPeriod: 1 as Period,
@@ -85,6 +85,7 @@ const validationSchema = yup.object().shape({
 });
 
 interface formProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (e: any) => void;
   error?: string;
 }
@@ -161,9 +162,8 @@ const CreateForm = ({ handleCourseUpdate }: CreateFormProps) => {
   const [error, setError] = useState<string>('');
   const [create] = useCourse();
 
-  const onSubmit = async (values: NewCourse) => {
+  const onSubmit = async (values: FormCourse) => {
     const { name, code, ects, year, startPeriod, endPeriod } = values;
-    //There's currently a bug, that the type of ects is string so  I change it into a Integer here. Cleaner solution is soon to follow.
     try {
       const course = await create({
         name,

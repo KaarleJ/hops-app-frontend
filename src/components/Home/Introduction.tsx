@@ -17,13 +17,15 @@ const Introduction = () => {
         A small app for designing your university studies.
       </Typography>
       <Typography variant="h6">
-        Start by{''}
+        Start by
         <Link to="/signup" style={{ textDecoration: 'none' }}>
-          signin up
-        </Link>
-        . Or click
+          {' '}
+          signin up.
+        </Link>{' '}
+        Or click
         <Link to="/login" style={{ textDecoration: 'none' }}>
-          here
+          {' '}
+          here{' '}
         </Link>
         if already a user.
       </Typography>

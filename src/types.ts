@@ -29,6 +29,15 @@ export interface Course {
 
 export type NewCourse = Omit<Course, 'id'>;
 
+export interface FormCourse {
+  name: string;
+  code: string;
+  ects: string;
+  year: number;
+  startPeriod: Period;
+  endPeriod: Period;
+}
+
 export interface Me {
   courses: Course[];
   id: string;

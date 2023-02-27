@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './reducers/userReducer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   const user = useSelector((state: Rootstate) => state.user);
@@ -34,11 +35,17 @@ const App = () => {
           <Page>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/hops" element={<Hops />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/about" element={<About />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/hops" element={
+                <ProtectedRoute>
+                  <Hops />
+                </ProtectedRoute>} />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>} />
             </Routes>
           </Page>
         </Router>
