@@ -55,3 +55,17 @@ export const REMOVE_COURSE = gql`
     }
   }
 `;
+
+export const EDIT_COURSE = gql`
+  mutation Mutation($editCourseId: String!, $name: String, $ects: Int, $year: Int, $code: String, $startPeriod: Int, $endPeriod: Int) {
+    editCourse(id: $editCourseId, name: $name, ects: $ects, year: $year, code: $code, startPeriod: $startPeriod, endPeriod: $endPeriod) {
+      code
+      endPeriod
+      ects
+      id
+      name
+      startPeriod
+      year
+    }
+  }
+`;

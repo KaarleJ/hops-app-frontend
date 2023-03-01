@@ -97,9 +97,7 @@ const CourseColumn = ({ period }: ColumnProps) => {
               backgroundColor: 'white',
               boxShadow: 24,
               display: 'flex',
-              flexDirection: 'column',
-              pb: 2,
-              pl: 6,
+              flexDirection: 'column'
             }}
           >
             <CourseModal

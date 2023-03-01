@@ -1,10 +1,13 @@
-import { Course } from '../../types';
+import { useState } from 'react';
+import { Container, Button } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import { useSelector, useDispatch } from 'react-redux';
 import useRemove from '../../hooks/useRemove';
 import { setCourses } from '../../reducers/coursesReducer';
-import { useSelector, useDispatch } from 'react-redux';
-import { Typography, Button } from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear';
+import { Course } from '../../types';
+import CourseInfo from './CourseInfo';
 import { Rootstate } from '../../store';
+import EditCourseForm from './EditCourseForm';
 
 interface ModalProps {
   course: Course | undefined;
@@ -12,6 +15,7 @@ interface ModalProps {
 }
 
 const CourseModal = ({ course, close }: ModalProps) => {
+  const [edit, setEdit] = useState<boolean>(false);
   const courses = useSelector((state: Rootstate) => state.courses);
   const [remove] = useRemove();
   const dispatch = useDispatch();
@@ -26,9 +30,15 @@ const CourseModal = ({ course, close }: ModalProps) => {
     close();
   };
 
+  const handleUpdate = (editedCourse: Course) => {
+    dispatch(setCourses(courses.map((c) => c = c.id === editedCourse.id ? editedCourse : c)));
+    close();
+  };
+
   return (
-    <>
+    <Container sx={{ display: 'flex', flexDirection: 'column' }}>
       <Button
+        size={'small'}
         onClick={close}
         sx={{
           alignSelf: 'flex-end',
@@ -36,29 +46,52 @@ const CourseModal = ({ course, close }: ModalProps) => {
       >
         <ClearIcon />
       </Button>
-      <Typography
-        variant="h5"
-        noWrap={false}
-        sx={{ alignSelf: 'center', pr: 6 }}
+      {edit === false ? (
+        <CourseInfo course={course} close={close} />
+      ) : (
+        <EditCourseForm course={course} handleUpdate={handleUpdate} />
+      )}
+      <Container
+        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}
       >
-        {course.name}
-      </Typography>
-      <Typography> Code: {course.code} </Typography>
-      <Typography> Year: {course.year}</Typography>
-      <Typography> Startperiod: {course.startPeriod} </Typography>
-      <Typography> EndingPeriod: {course.endPeriod} </Typography>
-      <Typography> Ects: {course.ects} </Typography>
-      <Button
-        onClick={handleRemove}
-        sx={{
-          alignSelf: 'center',
-          backgroundColor: 'error.main',
-          color: 'white',
-        }}
-      >
-        Delete
-      </Button>
-    </>
+        {edit ? (
+          <Button
+            onClick={() => setEdit(false)}
+            sx={{
+              alignSelf: 'center',
+              backgroundColor: 'secondary.main',
+              color: 'white',
+              m: 1,
+            }}
+          >
+            cancel edit
+          </Button>
+        ) : (
+          <Button
+            onClick={() => setEdit(true)}
+            sx={{
+              alignSelf: 'center',
+              backgroundColor: 'secondary.main',
+              color: 'white',
+              m: 1,
+            }}
+          >
+            edit
+          </Button>
+        )}
+        <Button
+          onClick={handleRemove}
+          sx={{
+            alignSelf: 'center',
+            backgroundColor: 'error.main',
+            color: 'white',
+            m: 1,
+          }}
+        >
+          delete
+        </Button>
+      </Container>
+    </Container>
   );
 };
 

@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
   const user = useSelector((state: Rootstate) => state.user);
   if (!user) {
-    return <Navigate to='/' replace />;
+    return <Navigate to="/" replace />;
   }
   if (!children) {
     return null;

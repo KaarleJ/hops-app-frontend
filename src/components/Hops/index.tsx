@@ -90,7 +90,7 @@ const Hops = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <Button variant="contained" sx={{ margin: 2 }} onClick={handleOpen}>
+        <Button variant="contained" sx={{ margin: 2, backgroundColor: 'secondary.main' }} onClick={handleOpen}>
           Add a new course
         </Button>
       </Box>

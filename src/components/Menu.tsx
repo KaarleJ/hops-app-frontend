@@ -98,7 +98,7 @@ const Menu = () => {
                       <Typography
                         textAlign="center"
                         variant="h6"
-                        color="secondary"
+                        color="text.primary"
                       >
                         Profile
                       </Typography>
@@ -112,7 +112,7 @@ const Menu = () => {
                       <Typography
                         textAlign="center"
                         variant="h6"
-                        color="secondary"
+                        color="text.primary"
                       >
                         Logout
                       </Typography>
