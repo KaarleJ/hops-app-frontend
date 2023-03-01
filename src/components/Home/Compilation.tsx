@@ -3,39 +3,30 @@ import useMe from '../../hooks/useMe';
 
 const Compilation = () => {
   const [me, loading] = useMe();
-  const date = new Date();
+  const month = new Date().getMonth()+1;
   const period = {
     label: 'summer (pre-year)',
     value: 0,
   };
 
-  switch (date.getMonth()) {
-    case 7:
-      period.value = 0;
-      period.label = 'summer (pre-year)';
-      break;
-    case 8 || 9:
-      period.value = 1;
-      period.label = '1';
-      break;
-    case 10 || 11 || 12:
-      period.value = 2;
-      period.label = '2';
-      break;
-    case 1 || 2:
-      period.value = 3;
-      period.label = '3';
-      break;
-    case 3 || 4 || 5:
-      period.value = 4;
-      period.label = '4';
-      break;
-    case 6:
-      period.value = 5;
-      period.label = 'summer (post-year)';
-      break;
-    default:
-      break;
+  if (month === 7) {
+    period.value = 0;
+    period.label = 'summer (pre-year)';
+  } else if ( month === 8 || month === 9) {
+    period.value = 1;
+    period.label = '1';
+  } else if ( 9 < month && month <=12 ) {
+    period.value = 2;
+    period.label = '2';
+  } else if ( month === 1 || month === 2) {
+    period.value = 3;
+    period.label = '3';
+  } else if ( 2 < month && month < 6 ) {
+    period.value = 4;
+    period.label = '4';
+  } else if ( month === 6 ) {
+    period.value = 5;
+    period.label = 'summer (post-year)';
   }
 
   if (!me || loading) {
@@ -73,7 +64,7 @@ const Compilation = () => {
         {
           me.courses.filter(
             (course) =>
-              course.year === date.getFullYear() &&
+              course.year === new Date().getFullYear() &&
               course.startPeriod <= period.value &&
               period.value <= course.endPeriod
           ).length
@@ -89,7 +80,7 @@ const Compilation = () => {
         {me.courses
           .filter(
             (course) =>
-              course.year === date.getFullYear() &&
+              course.year === new Date().getFullYear() &&
               course.startPeriod <= period.value &&
               period.value <= course.endPeriod
           )
