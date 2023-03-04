@@ -92,6 +92,7 @@ const CourseForm = ({ onSubmit, error, buttonLabel, header }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id='course-name-input'
         name="name"
         placeholder="course name here"
         sx={{ m: 1 }}
@@ -102,6 +103,7 @@ const CourseForm = ({ onSubmit, error, buttonLabel, header }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id='course-code-input'
         name="code"
         placeholder="Course code here"
         sx={{ m: 1 }}
@@ -112,6 +114,7 @@ const CourseForm = ({ onSubmit, error, buttonLabel, header }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id='course-ects-input'
         name="ects"
         placeholder="Course ects here"
         sx={{ m: 1 }}
@@ -130,6 +133,7 @@ const CourseForm = ({ onSubmit, error, buttonLabel, header }: formProps) => {
       {error ? <Typography color="error">{error}</Typography> : null}
 
       <Button
+        id='create-button'
         onClick={onSubmit}
         variant="contained"
         color="primary"

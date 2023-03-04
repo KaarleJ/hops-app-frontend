@@ -96,6 +96,7 @@ const Hops = () => {
       >
         <Tooltip title={'Add a new course to your calendar'}>
           <Button
+            id='add-course-button'
             variant="contained"
             sx={{ margin: 2, backgroundColor: 'secondary.main' }}
             onClick={handleOpen}

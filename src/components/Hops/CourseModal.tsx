@@ -71,6 +71,7 @@ const CourseModal = ({ course, close }: ModalProps) => {
           </Button>
         ) : (
           <Button
+            id='edit-course-button'
             onClick={() => setEdit(true)}
             sx={{
               alignSelf: 'center',
@@ -83,6 +84,7 @@ const CourseModal = ({ course, close }: ModalProps) => {
           </Button>
         )}
         <Button
+          id='remove-course-button'
           onClick={handleRemove}
           sx={{
             alignSelf: 'center',

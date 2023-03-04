@@ -35,3 +35,11 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('login', (username, password) => {
+  cy.get('#login-link').click();
+  cy.get('#username-input').type(username);
+  cy.get('#password-input').type(password);
+  cy.get('#submit').click();
+});
+

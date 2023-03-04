@@ -58,7 +58,7 @@ const Menu = () => {
 
           <Box sx={{ flexGrow: 1, flexShrink: 1, display: { md: 'flex' } }}>
             <Tooltip title={'The calendar for your studies'}>
-              <Link to={'/hops'} style={{ textDecoration: 'none' }}>
+              <Link id='hops-link' to={'/hops'} style={{ textDecoration: 'none' }}>
                 {
                   <Typography color="white" variant="h5">
                     HOPS
@@ -70,7 +70,7 @@ const Menu = () => {
 
           <Box sx={{ flexGrow: 1, flexShrink: 1, display: { md: 'flex' } }}>
             <Tooltip title={'Information of this app as a project'}>
-              <Link to={'/about'} style={{ textDecoration: 'none' }}>
+              <Link id='about-link' to={'/about'} style={{ textDecoration: 'none' }}>
                 {
                   <Typography color="white" variant="h5">
                     about
@@ -82,8 +82,8 @@ const Menu = () => {
 
           {user ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip id='menu' title="Options">
-                <IconButton data-cy='menu' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Tooltip title="Options">
+                <IconButton id='menu' data-cy='menu' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <MenuIcon sx={{ color: 'white' }} />
                 </IconButton>
               </Tooltip>
@@ -118,7 +118,7 @@ const Menu = () => {
                 </MenuItem>
 
                 <MenuItem onClick={handleLogOut}>
-                  <Link to={'/'} style={{ textDecoration: 'none' }}>
+                  <Link id='logout' to={'/'} style={{ textDecoration: 'none' }}>
                     {
                       <Typography
                         textAlign="center"
