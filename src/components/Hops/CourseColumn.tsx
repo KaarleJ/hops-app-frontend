@@ -1,4 +1,4 @@
-import { List, ListItemButton, ListItemText, Modal, Box } from '@mui/material';
+import { List, ListItemButton, ListItemText, Modal, Box, Tooltip } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -47,45 +47,46 @@ const CourseColumn = ({ period }: ColumnProps) => {
     <div>
       <List>
         {courses.map((course) => (
-          <ListItemButton
-            onClick={() => handleItemClick(course.id)}
-            key={course.id}
-            sx={{
-              backgroundColor: 'primary.main',
-              width: 'auto',
-              mt: 1,
-              mb: 1,
-              ml: 0.25,
-              mr: 0.25,
-              height: 60,
-              borderRadius: 2,
-              color: 'white',
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <ListItemText
+          <Tooltip key={course.id} title={'Click to inspect, edit or remove details of this course.'}>
+            <ListItemButton
+              onClick={() => handleItemClick(course.id)}
               sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                mr: 1,
+                backgroundColor: 'primary.main',
+                width: 'auto',
+                mt: 1,
+                mb: 1,
+                ml: 0.25,
+                mr: 0.25,
+                height: 60,
+                borderRadius: 2,
+                color: 'white',
+                display: 'flex',
+                flexDirection: 'row',
               }}
             >
-              {course.name}
-            </ListItemText>
+              <ListItemText
+                sx={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  mr: 1,
+                }}
+              >
+                {course.name}
+              </ListItemText>
 
-            {course.endPeriod !== course.startPeriod &&
-            period < course.endPeriod ? (
-                <ArrowRightAltIcon />
-              ) : (
-                <ListItemText
-                  sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                >
-                  {course.ects + ' ects'}
-                </ListItemText>
-              )}
-          </ListItemButton>
+              {course.endPeriod !== course.startPeriod &&
+              period < course.endPeriod ? (
+                  <ArrowRightAltIcon />
+                ) : (
+                  <ListItemText
+                    sx={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                  >
+                    {course.ects + ' ects'}
+                  </ListItemText>
+                )}
+            </ListItemButton>
+          </Tooltip>
         ))}
         <Modal open={open} onClose={handleClose}>
           <Box
@@ -97,7 +98,7 @@ const CourseColumn = ({ period }: ColumnProps) => {
               backgroundColor: 'white',
               boxShadow: 24,
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'column',
             }}
           >
             <CourseModal

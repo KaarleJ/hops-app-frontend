@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-  ]
+    "src",
+    "cypress"
+  ],
+  "types": ["cypress", "@testing-library/cypress", "node" ]
 }

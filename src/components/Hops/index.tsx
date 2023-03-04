@@ -1,6 +1,6 @@
 import Calendar from './Calendar';
 import CreateForm from './CreateForm';
-import { Typography, Button, Box, Modal } from '@mui/material';
+import { Typography, Button, Box, Modal, Tooltip } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState, useEffect } from 'react';
@@ -73,15 +73,19 @@ const Hops = () => {
             alignItems: 'center',
           }}
         >
-          <Button variant="text" onClick={() => setYear(year - 1)}>
-            <ArrowBackIosIcon />
-          </Button>
+          <Tooltip title={'Previous year'}>
+            <Button variant="text" onClick={() => setYear(year - 1)}>
+              <ArrowBackIosIcon />
+            </Button>
+          </Tooltip>
           <Typography variant="h3" color="black" align="center">
             {year - 1}-{year}
           </Typography>
-          <Button variant="text" onClick={() => setYear(year + 1)}>
-            <ArrowForwardIosIcon />
-          </Button>
+          <Tooltip title={'Next year'}>
+            <Button variant="text" onClick={() => setYear(year + 1)}>
+              <ArrowForwardIosIcon />
+            </Button>
+          </Tooltip>
         </Box>
       </Box>
       <Box
@@ -90,9 +94,15 @@ const Hops = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <Button variant="contained" sx={{ margin: 2, backgroundColor: 'secondary.main' }} onClick={handleOpen}>
-          Add a new course
-        </Button>
+        <Tooltip title={'Add a new course to your calendar'}>
+          <Button
+            variant="contained"
+            sx={{ margin: 2, backgroundColor: 'secondary.main' }}
+            onClick={handleOpen}
+          >
+            Add a new course
+          </Button>
+        </Tooltip>
       </Box>
       <Calendar />
     </>

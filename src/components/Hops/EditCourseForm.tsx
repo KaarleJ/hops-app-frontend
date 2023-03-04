@@ -3,6 +3,7 @@ import { Course, FormCourse } from '../../types';
 import CourseForm, { validationSchema } from './CourseForm';
 import useCourseUpdate from '../../hooks/useCourseUpdate';
 import { Formik } from 'formik';
+import { useNotify } from '../Notification';
 
 interface FormProps {
   course: Course;
@@ -11,6 +12,7 @@ interface FormProps {
 
 const EditCourseForm = ({ course, handleUpdate }: FormProps) => {
   const [ error, setError ] = useState<string>('');
+  const [notify] = useNotify();
   const [ edit ] = useCourseUpdate();
 
   const onSubmit = async (values: FormCourse) => {
@@ -27,6 +29,7 @@ const EditCourseForm = ({ course, handleUpdate }: FormProps) => {
       });
       if (newCourse) {
         handleUpdate(newCourse);
+        notify(`Updated the course ${newCourse.name}`);
       }
     } catch (e) {
       console.error(e);

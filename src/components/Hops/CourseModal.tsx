@@ -8,6 +8,7 @@ import { Course } from '../../types';
 import CourseInfo from './CourseInfo';
 import { Rootstate } from '../../store';
 import EditCourseForm from './EditCourseForm';
+import { useNotify } from '../Notification';
 
 interface ModalProps {
   course: Course | undefined;
@@ -17,6 +18,7 @@ interface ModalProps {
 const CourseModal = ({ course, close }: ModalProps) => {
   const [edit, setEdit] = useState<boolean>(false);
   const courses = useSelector((state: Rootstate) => state.courses);
+  const [notify] = useNotify();
   const [remove] = useRemove();
   const dispatch = useDispatch();
 
@@ -27,6 +29,7 @@ const CourseModal = ({ course, close }: ModalProps) => {
   const handleRemove = () => {
     remove(course.id);
     dispatch(setCourses(courses.filter((c) => c.id !== course.id)));
+    notify(`Succesfully removed the course ${course.name}`);
     close();
   };
 

@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { Box, Button, Typography } from '@mui/material';
 import FormikTextInput from '../FormikTextInput';
 import { useState } from 'react';
+import { useNotify } from '../Notification';
 
 const initialValues = {
   username: '',
@@ -37,6 +38,7 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id='username-input'
         name="username"
         placeholder="username"
         sx={{ mb: 2, mt: 4 }}
@@ -47,6 +49,7 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id='password-input'
         name="password"
         placeholder="password"
         type="password"
@@ -56,6 +59,7 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
       {error ? <Typography color="error">{error}</Typography> : null}
 
       <Button
+        id='submit'
         onClick={onSubmit}
         variant="contained"
         color="primary"
@@ -69,6 +73,7 @@ const SignInForm = ({ onSubmit, error }: formProps) => {
 
 const SignIn = () => {
   const [error, setError] = useState<string>('');
+  const [notify] = useNotify();
   const navigate = useNavigate();
   const { login } = useLogin();
 
@@ -78,6 +83,7 @@ const SignIn = () => {
     try {
       await login({ username, password });
       navigate('/');
+      notify(`Succesfully logged in as ${username}`);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {

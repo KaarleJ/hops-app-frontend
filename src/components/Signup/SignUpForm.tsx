@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { Box, Button, Typography } from '@mui/material';
 import FormikTextInput from '../FormikTextInput';
 import { useState } from 'react';
+import { useNotify } from '../Notification';
 
 const initialValues = {
   username: '',
@@ -28,7 +29,7 @@ const validationSchema = yup.object().shape({
     .string()
     .max(30, 'Maximum length is 30 characters')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&.:,;-_'^¨~])[A-Za-z\d@$!%*#?&.:,;-_'^¨~]{8,}$/,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     )
     .required('password missing'),
@@ -54,6 +55,7 @@ const SignUpForm = ({ onSubmit, error }: formProps) => {
       </Typography>
 
       <FormikTextInput
+        id="username-input"
         name="username"
         placeholder="username"
         sx={{ mb: 2, mt: 2 }}
@@ -63,13 +65,19 @@ const SignUpForm = ({ onSubmit, error }: formProps) => {
         Full name
       </Typography>
 
-      <FormikTextInput name="name" placeholder="name" sx={{ mb: 2, mt: 2 }} />
+      <FormikTextInput
+        id="name-input"
+        name="name"
+        placeholder="name"
+        sx={{ mb: 2, mt: 2 }}
+      />
 
       <Typography variant="h6" color="text">
         Password
       </Typography>
 
       <FormikTextInput
+        id='password-input'
         name="password"
         placeholder="password"
         type="password"
@@ -79,6 +87,7 @@ const SignUpForm = ({ onSubmit, error }: formProps) => {
       {error ? <Typography color="error">{error}</Typography> : null}
 
       <Button
+        id='submit'
         onClick={onSubmit}
         variant="contained"
         color="primary"
@@ -93,6 +102,7 @@ const SignUpForm = ({ onSubmit, error }: formProps) => {
 const SignUp = () => {
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
+  const [notify] = useNotify();
   const { signUp } = useSignUp();
 
   const onSubmit = async (values: Signup) => {
@@ -101,6 +111,7 @@ const SignUp = () => {
     try {
       await signUp({ username, name, password });
       navigate('/');
+      notify(`Succesfully signed up as ${username}`);
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {

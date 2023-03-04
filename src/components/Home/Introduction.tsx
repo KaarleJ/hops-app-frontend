@@ -11,7 +11,7 @@ const Introduction = () => {
       }}
     >
       <Typography variant="h4" color="black" p={5}>
-        Welcome To HOPSapp!!!
+        Welcome to HOPSapp!!!
       </Typography>
       <Typography variant="h6">
         A small app for designing your university studies.

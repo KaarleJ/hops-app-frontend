@@ -7,6 +7,7 @@ import {
   Period
 } from '../../types';
 import { useState } from 'react';
+import { useNotify } from '../Notification';
 
 interface CreateFormProps {
   handleCourseUpdate: (course: Course) => void;
@@ -24,6 +25,7 @@ const initialValues = {
 const CreateForm = ({ handleCourseUpdate }: CreateFormProps) => {
   const [error, setError] = useState<string>('');
   const [create] = useCourse();
+  const [notify] = useNotify();
 
   const onSubmit = async (values: FormCourse) => {
     const { name, code, ects, year, startPeriod, endPeriod } = values;
@@ -38,6 +40,7 @@ const CreateForm = ({ handleCourseUpdate }: CreateFormProps) => {
       });
       if (course) {
         handleCourseUpdate(course);
+        notify(`Succesfully added the course ${course.name}`);
       }
     } catch (e) {
       console.error(e);
