@@ -1,11 +1,11 @@
-describe('HopsApp', () => {
+describe('HopsApp without seed data', () => {
   beforeEach(() => {
     cy.visit('http://localhost:4000');
   });
   it('Website can be visited', () => {
+    cy.empty();
     cy.contains('Welcome to HOPSapp!!!');
     cy.contains('A small app for designing your university studies.');
-    cy.request('POST', 'http://localhost:4000/api/testing/reset');
   });
 
   it('About page can be viewed', () => {
@@ -72,6 +72,39 @@ describe('HopsApp', () => {
       cy.contains('4 ects').click();
       cy.get('#remove-course-button').click();
       cy.contains('Succesfully removed the course TestCourse1');
+    });
+  });
+});
+
+describe('With seed data', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:4000');
+  });
+  it('Login will succeed with seed user', () => {
+    cy.empty();
+    cy.seed();
+    cy.login('HopTester', 'TesterPassword123!');
+    cy.contains('Succesfully logged in as HopTester');
+  });
+
+  describe('Logged in ', () => {
+    beforeEach(() => {
+      cy.login('HopTester', 'TesterPassword123!');
+      cy.get('#hops-link').click();
+    });
+
+    it('Seed courses are shown', () => {
+      cy.contains('TestCourse1');
+      cy.contains('TestCourse2');
+    });
+
+    it('Year pages show courses correctly', () => {
+      cy.get('#next-year-button').click();
+      cy.contains('TestCourse3');
+      cy.contains('TestCourse4');
+      cy.get('#prev-year-button').click();
+      cy.contains('TestCourse1');
+      cy.contains('TestCourse2');
     });
   });
 });

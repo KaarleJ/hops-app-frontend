@@ -74,7 +74,7 @@ const Hops = () => {
           }}
         >
           <Tooltip title={'Previous year'}>
-            <Button variant="text" onClick={() => setYear(year - 1)}>
+            <Button id='prev-year-button'  variant="text" onClick={() => setYear(year - 1)}>
               <ArrowBackIosIcon />
             </Button>
           </Tooltip>
@@ -82,7 +82,7 @@ const Hops = () => {
             {year - 1}-{year}
           </Typography>
           <Tooltip title={'Next year'}>
-            <Button variant="text" onClick={() => setYear(year + 1)}>
+            <Button id='next-year-button' variant="text" onClick={() => setYear(year + 1)}>
               <ArrowForwardIosIcon />
             </Button>
           </Tooltip>

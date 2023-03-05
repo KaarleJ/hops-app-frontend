@@ -43,3 +43,10 @@ Cypress.Commands.add('login', (username, password) => {
   cy.get('#submit').click();
 });
 
+Cypress.Commands.add('empty', () => {
+  cy.request('POST', 'http://localhost:4000/api/testing/reset');
+});
+
+Cypress.Commands.add('seed', () => {
+  cy.request('POST', 'http://localhost:4000/api/testing/seed');
+});
