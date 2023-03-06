@@ -6,6 +6,8 @@ The app requires registering and logging in in order to use the calendar.
 
 This app is running [here](https://hopsapp.fly.dev/)
 
+Project backend [here](https://github.com/KaarleJ/hops-app-backend)
+
 The frontend of the app is crafted with Typescript, React and materialUI. E2E testing is performed with cypress.
 
 
