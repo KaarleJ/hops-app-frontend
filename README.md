@@ -1,11 +1,10 @@
 # Hops-app frontend
 
-The app is used to plan studies. The core functionality is a calendar which consists of 4 periods and 2 additional periods for summer studies. Courses can be added, edited and removed.
-
-The app requires registering and logging in in order to use the calendar.
-
-This app is running [here](https://hopsapp.fly.dev/)
-
+This is the frontendfor the HopsApp. The app is used to plan studies. The core functionality is a calendar which consists of 4 periods and 2 additional periods for summer studies. Courses can be added, edited and removed.
 Project backend [here](https://github.com/KaarleJ/hops-app-backend)
 
-The frontend of the app is crafted with Typescript, React and materialUI. E2E testing is performed with cypress.
+## Development
+
+The frontend of the app is crafted with Typescript, React and materialUI. I used Jest and Cypress for unit and E2E tests.
+
+The app iss deployed on fly.io [here](https://hopsapp.fly.dev/).
