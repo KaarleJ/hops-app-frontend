@@ -3,31 +3,57 @@ import useMe from '../../hooks/useMe';
 
 const Compilation = () => {
   const [me, loading] = useMe();
-  const month = new Date().getMonth()+1;
+  const month = new Date().getMonth() + 1;
   const period = {
     label: 'summer (pre-year)',
     value: 0,
   };
 
-  if (month === 7) {
-    period.value = 0;
-    period.label = 'summer (pre-year)';
-  } else if ( month === 8 || month === 9) {
-    period.value = 1;
-    period.label = '1';
-  } else if ( 9 < month && month <=12 ) {
-    period.value = 2;
-    period.label = '2';
-  } else if ( month === 1 || month === 2) {
-    period.value = 3;
-    period.label = '3';
-  } else if ( 2 < month && month < 6 ) {
-    period.value = 4;
-    period.label = '4';
-  } else if ( month === 6 ) {
-    period.value = 5;
-    period.label = 'summer (post-year)';
+  switch (month) {
+    case 7:
+      period.value = 0;
+      period.label = 'summer (pre-year)';
+      break;
+    case 8:
+    case 9:
+      period.value = 1;
+      period.label = '1';
+      break;
+    case 10:
+    case 11:
+    case 12:
+      period.value = 2;
+      period.label = '2';
+      break;
+    case 1:
+    case 2:
+      period.value = 3;
+      period.label = '3';
+      break;
+    case 3:
+    case 4:
+    case 5:
+      period.value = 4;
+      period.label = '4';
+      break;
+    case 6:
+      period.value = 5;
+      period.label = 'summer (post-year)';
+      break;
+    default:
+      period.value = 0;
+      period.label = 'summer (pre-year)';
+      break;
   }
+
+  const chooseYear = () => {
+    const year = new Date().getFullYear();
+    if (month >= 7) {
+      return year + 1;
+    } else {
+      return year;
+    }
+  };
 
   if (!me || loading) {
     return <div>loading</div>;
@@ -64,7 +90,7 @@ const Compilation = () => {
         {
           me.courses.filter(
             (course) =>
-              course.year === new Date().getFullYear() &&
+              course.year === chooseYear() &&
               course.startPeriod <= period.value &&
               period.value <= course.endPeriod
           ).length
@@ -80,7 +106,7 @@ const Compilation = () => {
         {me.courses
           .filter(
             (course) =>
-              course.year === new Date().getFullYear() &&
+              course.year === chooseYear() &&
               course.startPeriod <= period.value &&
               period.value <= course.endPeriod
           )

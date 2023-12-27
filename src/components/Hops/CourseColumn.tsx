@@ -1,4 +1,11 @@
-import { List, ListItemButton, ListItemText, Modal, Box, Tooltip } from '@mui/material';
+import {
+  List,
+  ListItemButton,
+  ListItemText,
+  Modal,
+  Box,
+  Tooltip,
+} from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -47,7 +54,10 @@ const CourseColumn = ({ period }: ColumnProps) => {
     <div>
       <List>
         {courses.map((course) => (
-          <Tooltip key={course.id} title={'Click to inspect, edit or remove details of this course.'}>
+          <Tooltip
+            key={course.id}
+            title={'Click to inspect, edit or remove details of this course.'}
+          >
             <ListItemButton
               onClick={() => handleItemClick(course.id)}
               sx={{
