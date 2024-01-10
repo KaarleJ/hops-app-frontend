@@ -7,4 +7,4 @@ Project backend [here](https://github.com/KaarleJ/hops-app-backend)
 
 The frontend of the app is crafted with Typescript, React and materialUI. I used Jest and Cypress for unit and E2E tests.
 
-The app is deployed on fly.io [here](https://hopsapp.fly.dev/).
+The app is deployed on fly.io [here](https://hops.fly.dev/).
