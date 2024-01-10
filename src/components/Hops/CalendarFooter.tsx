@@ -11,34 +11,38 @@ const CalendarFooter = () => {
 
   const SumUp = ({ period }: SumUpProps) => {
     return (
-      <Box sx={{ width: '16.6%', mt: 2 }}>
+      <Box sx={{ py: 2, borderTop: '1px solid #e0e0e0' }}>
         <Typography
           sx={{
-            textAlign: 'left',
-            ml: 5,
+            textAlign: 'center',
           }}
         >
-          Courses:{' '}
-          {
+          Courses:
+          {' ' +
             courses.filter(
               (course) =>
                 course.startPeriod <= period && period <= course.endPeriod
-            ).length
-          }
+            ).length}
         </Typography>
         <Typography
           sx={{
-            textAlign: 'left',
-            ml: 5,
+            textAlign: 'center',
           }}
         >
-          Ects:{' '}
-          {courses
-            .filter(
-              (course) =>
-                course.startPeriod <= period && period <= course.endPeriod
-            )
-            .reduce((total, course) => total + course.ects, 0)}
+          Ects:
+          {' ' +
+            courses
+              .filter(
+                (course) =>
+                  course.startPeriod <= period && period <= course.endPeriod
+              )
+              .reduce((total, course) => {
+                if (course.startPeriod === course.endPeriod) {
+                  return total + course.ects;
+                } else {
+                  return course.ects / (course.endPeriod - course.startPeriod + 1);
+                }
+              }, 0)}
         </Typography>
       </Box>
     );
@@ -47,8 +51,8 @@ const CalendarFooter = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'row',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(6, 1fr)',
       }}
     >
       <SumUp period={0} />
